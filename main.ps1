@@ -8,9 +8,10 @@ MinecraftServerHost_Log4j
 
 $vms = Get-Content -Path C:\test\tomatid.txt
 
-# ForEach in line goes through the $vms file, takes the name on every line, stops it & deletes it, at least in theory..
+# ForEach in line goes through the $vms file, takes the name on every line, searches for it recursively & deletes all matches..
 
-ForEach ($line in $vms) {
-  Stop-VM -VM $line -Confirm:$false
-  Remove-VM -VM $line -DeletePermanently
+ForEach ($VM_NAME in $vms) {
+  #Stop-VM -VM $line -Confirm:$false
+  # Searches from the path recursively and deletes all matches that are found in the $vms file
+  Remove-Item C:\test\* -Recurse -include $VM_NAME
    }
